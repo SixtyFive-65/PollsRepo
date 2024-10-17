@@ -22,35 +22,41 @@ namespace Polls.Api.Repository.User
         }
         public async Task<string> GetToken(UserModel user)
         {
+            var token = string.Empty;
             try
             {
-                var dbUser = await authDbContext.ApplicationUsers.FirstOrDefaultAsync(u => u.Username == user.Username && u.Password == user.Password);
+                var dbUser = await authDbContext.ApplicationUsers.FirstOrDefaultAsync(u => u.Username == user.Username);
 
                 if (dbUser == null)
                 {
                     return "";
                 }
 
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes(configuration["Jwt:Key"]);
-                var tokenDescriptor = new SecurityTokenDescriptor
+                if (BCrypt.Net.BCrypt.Verify(user.Password, dbUser.Password))
                 {
-                    Subject = new ClaimsIdentity(new[]
+                    var tokenHandler = new JwtSecurityTokenHandler();
+                    var key = Encoding.ASCII.GetBytes(configuration["Jwt:Key"]);
+                    var tokenDescriptor = new SecurityTokenDescriptor
                     {
-                  new Claim(ClaimTypes.NameIdentifier, dbUser.Id.ToString()),
-                  new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()) // Add a unique identifier
-                }),
-                    Expires = DateTime.UtcNow.AddMinutes(30),
-                    Issuer = configuration["Jwt:Issuer"], // Include the issuer
-                    Audience = configuration["Jwt:Audience"], // Include the audience
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-                };
+                        Subject = new ClaimsIdentity(new[]
+                        {
+                             new Claim(ClaimTypes.NameIdentifier, dbUser.Id.ToString()),
+                             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()) // Add a unique identifier
+                        }),
+                        Expires = DateTime.UtcNow.AddMinutes(30),
+                        Issuer = configuration["Jwt:Issuer"], // Include the issuer
+                        Audience = configuration["Jwt:Audience"], // Include the audience
+                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                    };
 
-                var token = tokenHandler.CreateToken(tokenDescriptor);
+                    var generatedToken = tokenHandler.CreateToken(tokenDescriptor);
 
-                Log.Information($"Successfuly generated token for {user.Username}");
+                    Log.Information($"Successfuly generated token for {user.Username}");
 
-                return tokenHandler.WriteToken(token);
+                    token = tokenHandler.WriteToken(generatedToken);
+                }
+
+                return token;
             }
             catch (Exception ex)
             {
@@ -71,7 +77,7 @@ namespace Polls.Api.Repository.User
                     var applicationUser = new ApplicationUser
                     {
                         Username = user.Username,
-                        Password = user.Password  //Encryp
+                        Password = BCrypt.Net.BCrypt.HashPassword(user.Password)
                     };
 
                     authDbContext.ApplicationUsers.Add(applicationUser);
