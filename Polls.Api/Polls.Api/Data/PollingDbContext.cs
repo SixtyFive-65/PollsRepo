@@ -1,0 +1,29 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Polls.Api.Data.DomainModels;
+
+namespace Polls.Api.Data
+{
+    public class PollingDbContext : DbContext
+    {
+        public PollingDbContext(DbContextOptions<PollingDbContext> options) : base(options)
+        {
+        }
+
+        public DbSet<Poll> Polls { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Option> Options { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Poll>()
+                .HasMany(p => p.Questions)
+                .WithOne(q => q.Poll)
+                .HasForeignKey(q => q.PollId);
+
+            modelBuilder.Entity<Question>()
+                .HasMany(q => q.Options)
+                .WithOne(o => o.Question)
+                .HasForeignKey(o => o.QuestionId);
+        }
+    }
+}

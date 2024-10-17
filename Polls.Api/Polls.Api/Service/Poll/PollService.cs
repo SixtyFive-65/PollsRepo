@@ -1,0 +1,23 @@
+﻿using Polls.Api.Models.Poll;
+using Polls.Api.Repository.Poll;
+
+namespace Polls.Api.Service.Poll
+{
+    public class PollService : IPollService
+    {
+        private readonly IPollRepository pollRepository;
+        public PollService(IPollRepository pollRepository)
+        {
+            this.pollRepository = pollRepository;
+        }
+        public async Task<bool> CreatePoll(PollModel model)
+        {
+            return default;
+        }
+
+        public async Task<IEnumerable<PollModel>> GetAllPolls()
+        {
+            return await pollRepository.GetAllPolls();
+        }
+    }
+}
