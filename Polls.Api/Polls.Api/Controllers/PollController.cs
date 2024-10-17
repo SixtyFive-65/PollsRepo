@@ -17,7 +17,7 @@ namespace Polls.Api.Controllers
         {
             var polls = await pollService.GetAllPolls();
 
-            return View(polls);
+            return Ok(polls);
         }
 
         [HttpPost("CreatePoll")]
