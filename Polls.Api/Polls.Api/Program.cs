@@ -7,14 +7,24 @@ using Polls.Api.Repository.Poll;
 using Polls.Api.Repository.User;
 using Polls.Api.Service.Poll;
 using Polls.Api.Service.User;
+using Serilog;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Configure Serilog
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .WriteTo.Console()
+    .WriteTo.File("c:/logs/PollingApi/log-.txt",
+        rollingInterval: RollingInterval.Day,
+        fileSizeLimitBytes: 10_000_000,
+        retainedFileCountLimit: 30)
+    .CreateLogger();
+
+builder.Host.UseSerilog();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 
@@ -68,7 +78,6 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-
 builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AuthDbContextConnectionString")));
 
@@ -80,7 +89,6 @@ builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<IPollRepository, PollRepository>();
 builder.Services.AddScoped<IPollService, PollService>();
-
 
 var app = builder.Build();
 

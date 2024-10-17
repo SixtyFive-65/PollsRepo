@@ -38,7 +38,7 @@ namespace Polls.Api.Controllers
 
             }
 
-            return BadRequest(new { Token, Message = "Failed to retreive Token" });
+            return Unauthorized(new { Token, Message = "Failed to retreive Token" });
         }
     }
 }
