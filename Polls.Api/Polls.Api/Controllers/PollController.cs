@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Polls.Api.Models.Poll;
 using Polls.Api.Service.Poll;
 
 namespace Polls.Api.Controllers
 {
+    [Authorize]
     public class PollController : Controller
     {
         private readonly IPollService pollService;

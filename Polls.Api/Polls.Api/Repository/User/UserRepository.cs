@@ -34,6 +34,8 @@ namespace Polls.Api.Repository.User
             {
                 Subject = new ClaimsIdentity(new[] { new Claim(ClaimTypes.NameIdentifier, dbUser.Id.ToString()) }),
                 Expires = DateTime.UtcNow.AddHours(1),
+                Issuer = configuration["Jwt:Issuer"], // Include the issuer
+                Audience = configuration["Jwt:Audience"], // Include the audience
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
@@ -44,7 +46,7 @@ namespace Polls.Api.Repository.User
 
         public async Task<bool> RegisterUser(UserModel user)
         {
-            var dbUser = await authDbContext.ApplicationUsers.FirstOrDefaultAsync(u => u.Username.ToLowerInvariant() == user.Username.ToLowerInvariant());
+            var dbUser = await authDbContext.ApplicationUsers.FirstOrDefaultAsync(u => u.Username== user.Username);
 
             if (dbUser == null)
             {

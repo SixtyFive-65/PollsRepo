@@ -32,7 +32,7 @@ namespace Polls.Api.Controllers
         {
             var Token = await userService.GetToken(user);
 
-            if (string.IsNullOrEmpty(Token))
+            if (!string.IsNullOrEmpty(Token))
             {
                 return Ok(new { Token });
 
