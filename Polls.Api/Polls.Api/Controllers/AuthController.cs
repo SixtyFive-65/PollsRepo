@@ -27,7 +27,7 @@ namespace Polls.Api.Controllers
             }
         }
 
-        [HttpPost("GetToken")]
+        [HttpPost("Login")]
         public async Task<IActionResult> GetToken(UserModel user)
         {
             var Token = await userService.GetToken(user);
