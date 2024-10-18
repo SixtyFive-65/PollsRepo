@@ -13,7 +13,7 @@ namespace Polls.Api.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<IActionResult> Register(UserModel user)
+        public async Task<IActionResult> Register([FromBody] RegisterUserModel user)
         {
             var registerUser = await userService.RegisterUser(user);
 
@@ -28,7 +28,7 @@ namespace Polls.Api.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> GetToken(UserModel user)
+        public async Task<IActionResult> GetToken([FromBody]UserLoginModel user)
         {
             var Token = await userService.GetToken(user);
 

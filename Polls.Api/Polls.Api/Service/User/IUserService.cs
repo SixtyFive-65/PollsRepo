@@ -4,7 +4,7 @@ namespace Polls.Api.Service.User
 {
     public interface IUserService
     {
-        Task<bool> RegisterUser(UserModel user);
-        Task<string> GetToken(UserModel user);
+        Task<bool> RegisterUser(RegisterUserModel user);
+        Task<string> GetToken(UserLoginModel user);
     }
 }

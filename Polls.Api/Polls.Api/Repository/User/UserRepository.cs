@@ -20,7 +20,7 @@ namespace Polls.Api.Repository.User
             this.authDbContext = authDbContext;
             this.configuration = configuration;
         }
-        public async Task<string> GetToken(UserModel user)
+        public async Task<string> GetToken(UserLoginModel user)
         {
             var token = string.Empty;
             try
@@ -66,7 +66,7 @@ namespace Polls.Api.Repository.User
             }
         }
 
-        public async Task<bool> RegisterUser(UserModel user)
+        public async Task<bool> RegisterUser(RegisterUserModel user)
         {
             try
             {
@@ -77,7 +77,9 @@ namespace Polls.Api.Repository.User
                     var applicationUser = new ApplicationUser
                     {
                         Username = user.Username,
-                        Password = BCrypt.Net.BCrypt.HashPassword(user.Password)
+                        Password = BCrypt.Net.BCrypt.HashPassword(user.Password),
+                        Email = user.Email,
+                        MobileNumber = user.MobileNumber
                     };
 
                     authDbContext.ApplicationUsers.Add(applicationUser);

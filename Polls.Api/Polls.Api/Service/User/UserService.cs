@@ -11,12 +11,12 @@ namespace Polls.Api.Service.User
         {
             this.userRepository = userRepository;
         }
-        public async Task<string> GetToken(UserModel user)
+        public async Task<string> GetToken(UserLoginModel user)
         {
             return await userRepository.GetToken(user);
         }
 
-        public Task<bool> RegisterUser(UserModel user)
+        public Task<bool> RegisterUser(RegisterUserModel user)
         {
             return userRepository.RegisterUser(user);
         }

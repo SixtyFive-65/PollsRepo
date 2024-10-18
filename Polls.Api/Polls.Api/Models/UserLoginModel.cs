@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Polls.Api.Models
 {
-    public class UserModel
+    public class UserLoginModel
     {
         [Required]
         [EmailAddress]

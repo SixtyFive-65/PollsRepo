@@ -15,6 +15,12 @@ namespace Polls.Api.Data
             builder.Entity<ApplicationUser>(entity => {
                 entity.HasIndex(e => e.Username).IsUnique();
             });
+            builder.Entity<ApplicationUser>(entity => {
+                entity.HasIndex(e => e.Email).IsUnique();
+            });
+            builder.Entity<ApplicationUser>(entity => {
+                entity.HasIndex(e => e.MobileNumber).IsUnique();
+            });
         }
     }
 }
