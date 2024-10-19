@@ -16,15 +16,14 @@ export class LoginComponent {
   onSubmit(form: NgForm) {
     if (form.valid) {
     this.authService.login(this.username, this.password).subscribe({
-      next: (response : string) => {
-        console.log('Login successful', response);
-        // Store JWT token or user data as needed
-        localStorage.setItem('token', response); // Adjust based on your API response
-        this.loginError = false; // Set error state
+      next: (response) => {
+        console.log('Login successful', response.token);
+
+        localStorage.setItem('token', response.token); 
       },
       error: (error) => {
         if (error.status === 401) {
-          this.loginError = true; // Set error state
+          this.loginError = true; 
         }
         console.error('Login failed', error);
       },

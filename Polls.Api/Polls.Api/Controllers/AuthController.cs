@@ -23,7 +23,13 @@ namespace Polls.Api.Controllers
 
             if (registerUser)
             {
-                return Ok(new { registerUser });
+                var token = await userService.GetToken(new UserLoginModel
+                {
+                    Username = user.Username,
+                    Password = user.Password
+                });
+
+                return Ok(new { token });
             }
             else
             {
@@ -39,15 +45,15 @@ namespace Polls.Api.Controllers
                 return BadRequest(new { user });
             }
 
-            var Token = await userService.GetToken(user);
+            var token = await userService.GetToken(user);
 
-            if (!string.IsNullOrEmpty(Token))
+            if (!string.IsNullOrEmpty(token))
             {
-                return Ok(new { Token });
+                return Ok(new { token });
 
             }
 
-            return Unauthorized(new { Token });
+            return Unauthorized(new { token });
         }
     }
 }

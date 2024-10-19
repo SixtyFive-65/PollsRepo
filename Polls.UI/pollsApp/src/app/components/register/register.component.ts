@@ -20,12 +20,13 @@ export class RegisterComponent {
     if(form.valid){
 
     this.authService.register(this.username, this.email, this.mobilenumber, this.password).subscribe({
-      next: (response : string) => {
+      next: (response) => {
         console.log('Registration successful', response);
+        localStorage.setItem('token', response.token); 
       },
       error: (error) => {
         if (error.status === 400) {
-          this.registerError = true; // Set error state
+          this.registerError = true;
         }
         console.error('Registration failed', error);
       },
@@ -37,6 +38,6 @@ export class RegisterComponent {
 
   onMobileNumberInput(event: any): void {
     const input = event.target as HTMLInputElement;
-    input.value = input.value.replace(/\D/g, '');  // Replace non-numeric characters
+    input.value = input.value.replace(/\D/g, ''); 
   }
 }
