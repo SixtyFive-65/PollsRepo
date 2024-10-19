@@ -9,6 +9,7 @@ import { ViewPollsComponent } from './components/view-polls/view-polls.component
 import { CreatePollComponent } from './components/create-poll/create-poll.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { RegisterComponent } from './components/register/register.component';
     ViewPollsComponent,
     CreatePollComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

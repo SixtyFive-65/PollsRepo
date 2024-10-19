@@ -5,9 +5,11 @@ import { CreatePollComponent } from './components/create-poll/create-poll.compon
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './auth.guard'; // Create this AuthGuard
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
-  { path: '', component: ViewPollsComponent },
+  { path: '', component: HomeComponent },
+  { path: 'view-polls', component: ViewPollsComponent },
   { path: 'create-poll', component: CreatePollComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
