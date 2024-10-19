@@ -19,11 +19,11 @@ namespace Polls.Api.Controllers
 
             if (registerUser)
             {
-                return Ok(new { registerUser, Message = "User Successfully registered" });
+                return Ok(new { registerUser });
             }
             else
             {
-                return BadRequest(new { registerUser, Message = "Failed to register user" });
+                return BadRequest(new { registerUser });
             }
         }
 
@@ -38,7 +38,7 @@ namespace Polls.Api.Controllers
 
             }
 
-            return Unauthorized(new { Token, Message = "Failed to retreive Token" });
+            return Unauthorized(new { Token });
         }
     }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,8 @@ export class LoginComponent {
 
   constructor(private authService: AuthService) {}
 
-  onSubmit() {
+  onSubmit(form: NgForm) {
+    if (form.valid) {
     this.authService.login(this.username, this.password).subscribe({
       next: (response : string) => {
         console.log('Login successful', response);
@@ -22,5 +24,8 @@ export class LoginComponent {
         console.error('Login failed', error);
       },
     });
+  }else{
+    console.error('Form is invalid');
+  }
   }
 }
