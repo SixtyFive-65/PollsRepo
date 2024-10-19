@@ -20,7 +20,7 @@ export class LoginComponent {
         console.log('Login successful', response);
         // Store JWT token or user data as needed
         localStorage.setItem('token', response); // Adjust based on your API response
-        this.loginError = true; // Set error state
+        this.loginError = false; // Set error state
       },
       error: (error) => {
         if (error.status === 401) {

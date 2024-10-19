@@ -1,35 +1,36 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-body">
-    <div class="container">
-      <a class="navbar-brand" routerLink="/">Polling</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-  
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
-          </li>
-          <li class="nav-item dropdown" *ngIf="authService.isLoggedIn()">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Polls
-            </a>
-            <ul class="dropdown-menu">
-              <li ><a class="dropdown-item" routerLink="/view-polls">View Polls</a></li>
-              <li><a class="dropdown-item" routerLink="/create-poll">Create Poll</a></li>
-            </ul>
-          </li>
-        </ul>
-  
-        <div class="d-flex">
-          <span *ngIf="authService.username" class="navbar-text text-light me-3">{{ authService.username }}</span>
-          <button *ngIf="!authService.isLoggedIn()" routerLink="/login" class="btn btn-outline-light me-2">Login</button>
-          <button *ngIf="!authService.isLoggedIn()" routerLink="/register" class="btn btn-outline-light me-2">Register</button>
-          <button *ngIf="authService.isLoggedIn()" (click)="logout()" class="btn btn-outline-danger">Logout</button>
-        </div>
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">Polling</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
+        </li>
+        <li class="nav-item dropdown" *ngIf="authService.isLoggedIn()">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Polls
+          </a>
+          <ul class="dropdown-menu bg-dark">
+            <li>
+              <a class="dropdown-item text-light" routerLink="/view-polls">View Polls</a>
+            </li>
+            <li>
+              <a class="dropdown-item text-light" routerLink="/create-poll">Create Poll</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="d-flex">
+        <span *ngIf="authService.username" class="navbar-text text-light me-3">{{ authService.username }}</span>
+        <button *ngIf="!authService.isLoggedIn()" routerLink="/login" class="btn btn-outline-light me-2">Login</button>
+        <button *ngIf="!authService.isLoggedIn()" routerLink="/register" class="btn btn-outline-light me-2">Register</button>
+        <button *ngIf="authService.isLoggedIn()" (click)="logout()" class="btn btn-outline-danger">Logout</button>
       </div>
     </div>
-  </nav>
-  
-
-  
+  </div>dd
+</nav>
