@@ -10,6 +10,7 @@ import { CreatePollComponent } from './components/create-poll/create-poll.compon
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
+import { ContactUsComponent } from './components/contact-us/contact-us.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HomeComponent } from './components/home/home.component';
     CreatePollComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    ContactUsComponent
   ],
   imports: [
     BrowserModule,

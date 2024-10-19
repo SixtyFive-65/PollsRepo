@@ -1,0 +1,55 @@
+.container {
+    max-width: 600px; /* Limit the width of the container */
+}
+
+h2 {
+    margin-bottom: 20px; /* Space below the heading */
+    font-size: 2em; /* Increase font size for the heading */
+    color: #343a40; /* Dark color for the heading */
+}
+
+.contact-info {
+    background-color: #ffffff; /* White background for card */
+    border-radius: 10px; /* Rounded corners */
+    border: 1px solid #ddd; /* Light border */
+}
+
+.card {
+    border: none; /* Remove default card border */
+}
+
+.card-body {
+    padding: 20px; /* Padding inside the card */
+}
+
+.card-title {
+    font-size: 1.5em; /* Font size for the title */
+    margin-bottom: 15px; /* Space below the title */
+}
+
+.card-text {
+    font-size: 1.1em; /* Slightly increase font size for text */
+    margin-bottom: 20px; /* Space below the text */
+}
+
+/* Add margin for spacing between labels and anchors */
+.card-text p {
+    margin-bottom: 10px; /* Space between each label and its anchor */
+}
+
+.contact-link {
+    color: #007bff; /* Link color */
+    text-decoration: none; /* Remove underline */
+}
+
+.contact-link:hover {
+    text-decoration: underline; /* Underline links on hover */
+    color: #0056b3; /* Darker blue on hover */
+}
+
+/* Optional: Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px; /* Padding for smaller screens */
+    }
+}
