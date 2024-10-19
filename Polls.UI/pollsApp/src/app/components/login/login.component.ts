@@ -9,6 +9,7 @@ import { NgForm } from '@angular/forms';
 export class LoginComponent {
   username: string = '';
   password: string = '';
+  loginError: boolean = false;
 
   constructor(private authService: AuthService) {}
 
@@ -19,8 +20,12 @@ export class LoginComponent {
         console.log('Login successful', response);
         // Store JWT token or user data as needed
         localStorage.setItem('token', response); // Adjust based on your API response
+        this.loginError = true; // Set error state
       },
-      error: (error : string) => {
+      error: (error) => {
+        if (error.status === 401) {
+          this.loginError = true; // Set error state
+        }
         console.error('Login failed', error);
       },
     });
