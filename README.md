@@ -33,6 +33,20 @@ https://download.microsoft.com/download/5/1/4/5145fe04-4d30-4b85-b0d1-39533663a2
  *-update-database -context "AuthDbContext"
  *-update-database -context "PollingDbContext"
 
+3. Install NodeJs to run Angular UI
+
+-https://nodejs.org/en/download/prebuilt-installer/current
+
+-Install npm install -g npm
+
+-Open the Polls.UI folder in the project solution
+-open command prompt and navigate to the UI solution
+
+-ng serve to run the UI on port 4200, you could have a different port if that port is already taken on your machine.
+
+-NB Cors is configured for port 4200 in the api solution, open the Polls.API solution and navigate to program.cs and change it to your port number if 4200 was changed.
+
+
 
 ## Testing 
 

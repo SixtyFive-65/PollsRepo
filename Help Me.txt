@@ -1,6 +1,0 @@
--Install SQL Express
-
-Run below commands on VS(nuget package manager console) to create the databases on the local sql server.
-
--update-database -context "AuthDbContext"
--update-database -context "PollingDbContext"
