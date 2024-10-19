@@ -17,7 +17,13 @@ export class AuthService {
     private http: HttpClient,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) {
+    // Restore the token and username from localStorage on initialization
+    if (isPlatformBrowser(this.platformId)) {
+      this.token = localStorage.getItem('token');
+      this.username = localStorage.getItem('username'); // Restore username
+    }
+  }
 
   login(username: string, password: string): Observable<any> {
     return this.http.post<{ token: string }>(`${this.apiUrl}/login`, { username, password }).pipe(
@@ -26,21 +32,23 @@ export class AuthService {
         this.username = username; // Set the username
         if (isPlatformBrowser(this.platformId)) {
           localStorage.setItem('token', this.token);
+          localStorage.setItem('username', this.username); // Store the username
         }
         this.router.navigate(['/']);
       })
     );
   }
 
-  register(username: string, password: string, mobilenumber: string, email : string): Observable<any> {
+  register(username: string, password: string, mobilenumber: string, email: string): Observable<any> {
     return this.http.post<{ token: string }>(`${this.apiUrl}/register`, { username, password, email, mobilenumber }).pipe(
       tap(response => {
         this.token = response.token;
         this.username = username; // Set the username
         if (isPlatformBrowser(this.platformId)) {
           localStorage.setItem('token', this.token);
+          localStorage.setItem('username', this.username); // Store the username
         }
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
       })
     );
   }
@@ -50,6 +58,7 @@ export class AuthService {
     this.username = null;
     if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem('token');
+      localStorage.removeItem('username'); // Remove the username
     }
     this.router.navigate(['/login']);
   }

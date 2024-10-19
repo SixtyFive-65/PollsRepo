@@ -30,4 +30,9 @@ export class RegisterComponent {
     console.error('Form is invalid')
   }
   }
+
+  onMobileNumberInput(event: any): void {
+    const input = event.target as HTMLInputElement;
+    input.value = input.value.replace(/\D/g, '');  // Replace non-numeric characters
+  }
 }
