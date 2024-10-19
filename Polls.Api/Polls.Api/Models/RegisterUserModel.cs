@@ -6,12 +6,10 @@ namespace Polls.Api.Models
     public class RegisterUserModel
     {
         [Required]
-        [EmailAddress]
         [StringLength(100, ErrorMessage = "Username cannot be longer than 100 characters.")]
         public string Username { get; set; }
 
         [Required]
-        [EmailAddress]
         [MinLength(10, ErrorMessage = "MobileNumber must 10 characters long.")]
         [StringLength(10, ErrorMessage = "MobileNumber must be 10 characters.")]
         public string MobileNumber { get; set; }

@@ -9,21 +9,25 @@ import { NgForm } from '@angular/forms';
 })
 export class RegisterComponent {
   username: string = '';
-  mobilenumber: string = '';
   email: string = '';
+  mobilenumber: string = '';
   password: string = '';
+  registerError: boolean = false;
 
   constructor(private authService: AuthService) {}
 
   onSubmit(form: NgForm) {
     if(form.valid){
 
-    this.authService.register(this.username, this.password, this.email, this.mobilenumber).subscribe({
+    this.authService.register(this.username, this.email, this.mobilenumber, this.password).subscribe({
       next: (response : string) => {
         console.log('Registration successful', response);
       },
-      error: (error : string) => {
-        console.error('Login failed', error);
+      error: (error) => {
+        if (error.status === 400) {
+          this.registerError = true; // Set error state
+        }
+        console.error('Registration failed', error);
       },
     });
   }else{

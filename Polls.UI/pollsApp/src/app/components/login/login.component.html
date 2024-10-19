@@ -14,10 +14,13 @@
           <div class="mb-3">
             <label for="password" class="form-label">Password:</label>
             <input type="password" id="password" class="form-control" 
-                   [(ngModel)]="password" name="password" required>
+                   [(ngModel)]="password" name="password" required  minlength="6">
             <div *ngIf="loginForm.submitted && !password" class="text-danger">
               Password is required.
             </div>
+            <div *ngIf="loginForm.submitted && password && loginForm.controls['password']?.errors?.['minlength']" class="text-danger">
+            Password must be at least 6 characters long.
+          </div>
           </div>
           <div *ngIf="loginError" class="text-danger mb-3">
             Invalid login credentials. Please try again.

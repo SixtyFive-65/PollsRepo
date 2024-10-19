@@ -39,8 +39,8 @@ export class AuthService {
     );
   }
 
-  register(username: string, password: string, mobilenumber: string, email: string): Observable<any> {
-    return this.http.post<{ token: string }>(`${this.apiUrl}/register`, { username, password, email, mobilenumber }).pipe(
+  register(username: string, email: string, mobilenumber: string, password: string,  ): Observable<any> {
+    return this.http.post<{ token: string }>(`${this.apiUrl}/register`, { username: username, email: email,  mobilenumber: mobilenumber, password: password }).pipe(
       tap(response => {
         this.token = response.token;
         this.username = username; // Set the username

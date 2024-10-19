@@ -15,6 +15,10 @@ namespace Polls.Api.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterUserModel user)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { user });
+            }
             var registerUser = await userService.RegisterUser(user);
 
             if (registerUser)
@@ -30,8 +34,12 @@ namespace Polls.Api.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> GetToken([FromBody]UserLoginModel user)
         {
-            var Token = await userService.GetToken(user);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { user });
+            }
 
+            var Token = await userService.GetToken(user);
 
             if (!string.IsNullOrEmpty(Token))
             {
