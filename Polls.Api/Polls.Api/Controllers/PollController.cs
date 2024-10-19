@@ -36,5 +36,21 @@ namespace Polls.Api.Controllers
                 return BadRequest(createPollResult);
             }
         }
+
+
+        [HttpPost("Vote")]
+        public async Task<IActionResult> Vote(PollModel model)
+        {
+            var createPollResult = await pollService.CreatePoll(model);
+
+            if (createPollResult)
+            {
+                return Ok(createPollResult);
+            }
+            else
+            {
+                return BadRequest(createPollResult);
+            }
+        }
     }
 }

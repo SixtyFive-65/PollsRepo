@@ -6,5 +6,6 @@ namespace Polls.Api.Service.Poll
     {
         Task<IEnumerable<PollModel>> GetAllPolls();
         Task<bool> CreatePoll(PollModel model);
+        Task<bool> Vote(PollModel model);
     }
 }

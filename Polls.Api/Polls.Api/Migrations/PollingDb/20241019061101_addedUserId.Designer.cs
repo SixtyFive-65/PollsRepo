@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Polls.Api.Data;
 
@@ -10,9 +11,11 @@ using Polls.Api.Data;
 namespace Polls.Api.Migrations.PollingDb
 {
     [DbContext(typeof(PollingDbContext))]
-    partial class PollingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241019061101_addedUserId")]
+    partial class addedUserId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

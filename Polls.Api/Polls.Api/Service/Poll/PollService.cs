@@ -15,6 +15,12 @@ namespace Polls.Api.Service.Poll
             return default;
         }
 
+        public async Task<bool> Vote(PollModel model)
+        {
+            return default;
+        }
+
+
         public async Task<IEnumerable<PollModel>> GetAllPolls()
         {
             return await pollRepository.GetAllPolls();

@@ -16,6 +16,21 @@ namespace Polls.Api.Repository.Poll
             this.configuration = configuration;
         }
 
+        public async Task<IEnumerable<PollModel>> GetAllPolls()
+        {
+            try
+            {
+                var polls = await pollingDbContext.Polls.ToListAsync();
+
+                return new List<PollModel>();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, ex);
+
+                return new List<PollModel>();
+            }
+        }
         public async Task<bool> CreatePoll(PollModel model)
         {
             try
@@ -30,20 +45,9 @@ namespace Polls.Api.Repository.Poll
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<PollModel>> GetAllPolls()
+        public Task<bool> Vote(PollModel model)
         {
-            try
-            {
-                var polls = await pollingDbContext.Polls.ToListAsync();
-
-                return new List<PollModel>();
-            }
-            catch(Exception ex)
-            {
-                Log.Error(ex.Message, ex);
-
-                return new List<PollModel>();
-            }
+            throw new NotImplementedException();
         }
     }
 }
