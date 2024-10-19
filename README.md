@@ -40,7 +40,7 @@ https://download.microsoft.com/download/5/1/4/5145fe04-4d30-4b85-b0d1-39533663a2
 -Install npm install -g npm
 
 -Open the Polls.UI folder in the project solution
--open command prompt and navigate to the UI solution
+-open command prompt and navigate to the UI solution (pollsApp)
 
 -ng serve to run the UI on port 4200, you could have a different port if that port is already taken on your machine.
 
