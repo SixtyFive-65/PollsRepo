@@ -11,7 +11,7 @@
   <div *ngFor="let poll of polls" class="mb-4 border p-3 rounded">
     <h5>{{ poll.question }}</h5>
     <ul>
-      <li *ngFor="let option of poll.options">{{ option.optionText }}</li>
+      <li *ngFor="let option of poll.options">{{ option.optionText }} - {{ option.voteCount }} votes</li>
     </ul>
   </div>
 </div>

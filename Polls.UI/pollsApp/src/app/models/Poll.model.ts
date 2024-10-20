@@ -1,5 +1,5 @@
 export interface Poll {
-  id: number; // Add an id field if needed
+  id: number; 
   question: string;
   options: Option[];
 }
@@ -7,6 +7,7 @@ export interface Poll {
 export interface Option {
   id: number;
   optionText: string;
+  voteCount: number
 }
 
 export interface Question {
