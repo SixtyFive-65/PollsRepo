@@ -29,9 +29,9 @@ builder.Host.UseSerilog();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
-        builder => builder.WithOrigins("http://localhost:4200")
-                          .AllowAnyMethod()
-                          .AllowAnyHeader());
+        builder => builder.AllowAnyOrigin()   //builder.WithOrigins("http://localhost:4200") For production we would only allow the specific adress, for this apps testing we can allow all for now!!
+                          .AllowAnyMethod()  
+                          .AllowAnyHeader()); 
 });
 
 builder.Services.AddControllers()

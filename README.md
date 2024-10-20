@@ -44,8 +44,10 @@ https://download.microsoft.com/download/5/1/4/5145fe04-4d30-4b85-b0d1-39533663a2
 
 -ng serve to run the UI on port 4200, you could have a different port if that port is already taken on your machine.
 
--NB Cors is configured for port 4200 in the api solution, open the Polls.API solution and navigate to program.cs and change it to your port number if 4200 was changed.
+-NB Cors is configured for port 4200 in the api solution, open the Polls.API solution and navigate to program.cs and change it to your port number if 4200 was changed. (For Dev we are allowing all origins)
 
+
+4.Register and account start creating and voting on polls.
 
 
 ## Testing 
