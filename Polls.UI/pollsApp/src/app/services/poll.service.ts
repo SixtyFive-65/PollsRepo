@@ -26,11 +26,29 @@ export class PollService {
 
   // Get existing polls
   getPolls(): Observable<any> {
-    return this.http.get<any[]>(`${this.apiUrl}/GetPolls`);
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`, 
+      'Content-Type': 'application/json' 
+    });
+
+    return this.http.get<any[]>(`${this.apiUrl}/GetPolls`,{headers});
   }
 
   // Submit a vote for a poll
   submitVote(pollId: string, optionId: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/vote`, {pollId, optionId });
+    const token = localStorage.getItem('token');
+    
+    console.log({ pollId, optionId });
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`, 
+      'Content-Type': 'application/json' 
+    });
+
+    var payload = {pollId, optionId };
+
+    return this.http.post(`${this.apiUrl}/vote`, payload, {headers});
   }
 }

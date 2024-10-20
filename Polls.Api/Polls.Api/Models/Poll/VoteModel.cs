@@ -2,7 +2,7 @@
 {
     public class VoteModel
     {
-        public string PollId { get; set; }
-        public string OptionId { get; set; }
+        public int PollId { get; set; }
+        public int OptionId { get; set; }
     }
 }
