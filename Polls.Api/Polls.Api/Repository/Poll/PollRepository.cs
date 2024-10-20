@@ -10,12 +10,10 @@ namespace Polls.Api.Repository.Poll
     public class PollRepository : IPollRepository
     {
         private readonly PollingDbContext pollingDbContext;
-        private readonly IConfiguration configuration;
 
-        public PollRepository(PollingDbContext pollingDbContext, IConfiguration configuration)
+        public PollRepository(PollingDbContext pollingDbContext)
         {
             this.pollingDbContext = pollingDbContext;
-            this.configuration = configuration;
         }
 
         public async Task<IEnumerable<PollResponseModel>> GetAllPolls()
