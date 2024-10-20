@@ -31,6 +31,6 @@ export class PollService {
 
   // Submit a vote for a poll
   submitVote(pollId: string, optionId: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/${pollId}/vote`, { optionId });
+    return this.http.post(`${this.apiUrl}/vote`, {pollId, optionId });
   }
 }

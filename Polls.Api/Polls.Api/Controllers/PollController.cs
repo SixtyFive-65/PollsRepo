@@ -23,7 +23,7 @@ namespace Polls.Api.Controllers
         }
 
         [HttpPost("CreatePoll")]
-        public async Task<IActionResult> CreatePoll([FromBody]PollModel model)
+        public async Task<IActionResult> CreatePoll([FromBody] PollModel model)
         {
             var createPollResult = await pollService.CreatePoll(model);
 
@@ -39,18 +39,20 @@ namespace Polls.Api.Controllers
 
 
         [HttpPost("Vote")]
-        public async Task<IActionResult> Vote(PollModel model)
+        public async Task<IActionResult> Vote([FromBody] VoteModel model)
         {
-            var createPollResult = await pollService.CreatePoll(model);
+            //var createPollResult = await pollService.CreatePoll(model);
 
-            if (createPollResult)
-            {
-                return Ok(createPollResult);
-            }
-            else
-            {
-                return BadRequest(createPollResult);
-            }
+            //if (createPollResult)
+            //{
+            //    return Ok(createPollResult);
+            //}
+            //else
+            //{
+            //    return BadRequest(createPollResult);
+            //}
+
+            return default;
         }
     }
 }

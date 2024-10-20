@@ -13,6 +13,5 @@
     <ul>
       <li *ngFor="let option of poll.options">{{ option.optionText }}</li>
     </ul>
-    <a [routerLink]="['/vote', poll.id]" class="btn btn-primary">Vote</a> <!-- Adjust the routing if needed -->
   </div>
 </div>
