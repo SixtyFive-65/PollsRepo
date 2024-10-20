@@ -11,6 +11,9 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { VotePollComponent  } from './components/vote-poll/vote-poll.component';
+
 
 @NgModule({
   declarations: [
@@ -21,13 +24,15 @@ import { ContactUsComponent } from './components/contact-us/contact-us.component
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    VotePollComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration(),

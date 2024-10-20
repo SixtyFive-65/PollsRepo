@@ -7,6 +7,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './auth.guard'; // Create this AuthGuard
 import { HomeComponent } from './components/home/home.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { VotePollComponent } from './components/vote-poll/vote-poll.component';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,6 +17,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'contact-us', component: ContactUsComponent },
+  { path: 'vote-poll', component: VotePollComponent },
 ];
 
 @NgModule({

@@ -11,7 +11,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = environment.apiUrl;; // Replace with your API URL
+  private apiUrl = environment.apiUrl;; 
   private token: string | null = null;
   public username: string | null = null;
 
@@ -20,10 +20,9 @@ export class AuthService {
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
-    // Restore the token and username from localStorage on initialization
     if (isPlatformBrowser(this.platformId)) {
       this.token = localStorage.getItem('token');
-      this.username = localStorage.getItem('username'); // Restore username
+      this.username = localStorage.getItem('username'); 
     }
   }
 
@@ -31,10 +30,10 @@ export class AuthService {
     return this.http.post<{ token: string }>(`${this.apiUrl}/login`, { username, password }).pipe(
       tap(response => {
         this.token = response.token;
-        this.username = username; // Set the username
+        this.username = username; 
         if (isPlatformBrowser(this.platformId)) {
           localStorage.setItem('token', this.token);
-          localStorage.setItem('username', this.username); // Store the username
+          localStorage.setItem('username', this.username); 
         }
         this.router.navigate(['/']);
       })
@@ -45,10 +44,10 @@ export class AuthService {
     return this.http.post<{ token: string }>(`${this.apiUrl}/register`, { username: username, email: email,  mobilenumber: mobilenumber, password: password }).pipe(
       tap(response => {
         this.token = response.token;
-        this.username = username; // Set the username
+        this.username = username; 
         if (isPlatformBrowser(this.platformId)) {
           localStorage.setItem('token', this.token);
-          localStorage.setItem('username', this.username); // Store the username
+          localStorage.setItem('username', this.username);
         }
         this.router.navigate(['/']);
       })
@@ -60,7 +59,7 @@ export class AuthService {
     this.username = null;
     if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem('token');
-      localStorage.removeItem('username'); // Remove the username
+      localStorage.removeItem('username'); 
     }
     this.router.navigate(['/login']);
   }
@@ -69,6 +68,6 @@ export class AuthService {
     if (isPlatformBrowser(this.platformId)) {
       return this.token !== null || localStorage.getItem('token') !== null;
     }
-    return false; // Not logged in if not in the browser
+    return false;
   }
 }

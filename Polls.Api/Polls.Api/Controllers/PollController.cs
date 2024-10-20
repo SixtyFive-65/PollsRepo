@@ -23,7 +23,7 @@ namespace Polls.Api.Controllers
         }
 
         [HttpPost("CreatePoll")]
-        public async Task<IActionResult> CreatePoll(PollModel model)
+        public async Task<IActionResult> CreatePoll([FromBody]PollModel model)
         {
             var createPollResult = await pollService.CreatePoll(model);
 

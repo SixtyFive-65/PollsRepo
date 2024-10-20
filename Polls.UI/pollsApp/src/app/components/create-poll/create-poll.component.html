@@ -1,18 +1,28 @@
 <div class="container d-flex justify-content-center align-items-start mt-5" style="min-height: 80vh;">
   <div class="col-md-6">
     <h2 class="text-center mb-4">Create Poll</h2>
-    <form>
-      <div class="form-group mb-3">
-        <label for="pollTitle">Poll Title</label>
-        <input type="text" class="form-control" id="pollTitle" required>
+    <form [formGroup]="pollForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="question" class="form-label">Poll Question</label>
+        <input type="text" formControlName="question" class="form-control" placeholder="Enter poll question" required>
+        <div *ngIf="pollForm.get('question')?.invalid && pollForm.get('question')?.touched" class="text-danger">
+          Question is required.
+        </div>
       </div>
-      <div class="form-group mb-3">
-        <label for="options">Options (comma separated)</label>
-        <input type="text" class="form-control" id="options" required>
+
+      <div formArrayName="options">
+        <div *ngFor="let option of options.controls; let i = index" [formGroupName]="i" class="mb-3">
+          <label for="optionText" class="form-label">Option {{i + 1}}</label>
+          <input type="text" class="form-control" formControlName="optionText" placeholder="Enter option" required>
+          <div *ngIf="option.get('optionText')?.invalid && option.get('optionText')?.touched" class="text-danger">
+            Option text is required.
+          </div>
+          <button *ngIf="i > 0" type="button" (click)="removeOption(i)" class="btn btn-danger btn-sm mt-2">Remove</button>
+        </div>
       </div>
-      <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-primary">Create Poll</button>
-      </div>
+
+      <button type="button" (click)="addOption()" class="btn btn-secondary mt-2">Add Option</button>
+      <button type="submit" class="btn btn-primary mt-3" [disabled]="pollForm.invalid">Submit Poll</button>
     </form>
   </div>
 </div>
