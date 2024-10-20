@@ -53,6 +53,15 @@ namespace Polls.Api.Repository.Poll
         {
             try
             {
+                var checkPoll = await pollingDbContext.Polls.FirstOrDefaultAsync(p => p.Question == model.Question);
+
+                if (checkPoll != null)
+                {
+                    Log.Warning($"{model.Question} already exists");
+
+                    return false;
+                }
+
                 var poll = new Polls.Api.Data.DomainModels.Poll
                 {
                     Question = model.Question,
@@ -118,6 +127,8 @@ namespace Polls.Api.Repository.Poll
 
                 if (voteResult > 0)
                 {
+                    Log.Information($"Successfully voted for {model.OptionId}!");
+
                     voteResponse = true;
                 }
 

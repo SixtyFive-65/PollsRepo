@@ -25,6 +25,10 @@ namespace Polls.Api.Data
                 .HasMany(q => q.Options)
                 .WithOne(o => o.Question)
                 .HasForeignKey(o => o.QuestionId);
+
+            modelBuilder.Entity<Poll>(entity => {
+                entity.HasIndex(e => e.Question).IsUnique();
+            });
         }
     }
 }

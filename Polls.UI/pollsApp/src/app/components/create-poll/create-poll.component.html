@@ -20,7 +20,9 @@
           <button *ngIf="i > 0" type="button" (click)="removeOption(i)" class="btn btn-danger btn-sm mt-2">Remove</button>
         </div>
       </div>
-
+      <div *ngIf="createError" class="text-danger mb-3">
+        Poll already exists. Please try again.
+      </div>
       <button type="button" (click)="addOption()" class="btn btn-secondary mt-2">Add Option</button>
       <button type="submit" class="btn btn-primary mt-3" [disabled]="pollForm.invalid">Submit Poll</button>
     </form>
