@@ -31,7 +31,7 @@ namespace Polls.Api.Repository.Poll
                     Id = p.Id,
                     UserId = p.UserId,
                     Question = p.Question,
-                    Options = p.Questions.SelectMany(o => o.Options).Select(o => new Models.Poll.Option // Mapping to the response model
+                    Options = p.Questions.SelectMany(o => o.Options).Select(o => new Models.Poll.Option 
                     {
                         Id = o.Id,
                         OptionText = o.OptionText,
