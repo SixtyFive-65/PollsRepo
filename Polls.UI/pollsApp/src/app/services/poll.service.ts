@@ -26,7 +26,7 @@ export class PollService {
 
   // Get existing polls
   getPolls(): Observable<any> {
-    return this.http.get(this.apiUrl);
+    return this.http.get(`${this.apiUrl}/GetPolls`);
   }
 
   // Submit a vote for a poll
