@@ -52,7 +52,9 @@ https://download.microsoft.com/download/5/1/4/5145fe04-4d30-4b85-b0d1-39533663a2
 
 ## Testing 
 
- Testing hasn't been fully implemented due to time constrait
+1. Unit testing was implemented for the api using Xunit because are we testing async methods.
+
+2.UI testing hasn't been implemented due to time constraint and a bit of a learning curve.
  
  ## Support
 
