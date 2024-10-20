@@ -4,12 +4,14 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5242'; // Replace with your API URL
+  private apiUrl = environment.apiUrl;; // Replace with your API URL
   private token: string | null = null;
   public username: string | null = null;
 
