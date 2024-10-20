@@ -40,8 +40,6 @@ export class PollService {
   submitVote(pollId: string, optionId: string): Observable<any> {
     const token = localStorage.getItem('token');
     
-    console.log({ pollId, optionId });
-
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`, 
       'Content-Type': 'application/json' 
