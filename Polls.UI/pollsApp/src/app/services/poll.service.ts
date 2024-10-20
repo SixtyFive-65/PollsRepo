@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Injectable({
@@ -14,7 +14,14 @@ export class PollService {
 
   // Create a new poll
   createPoll(pollData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/createpoll`, pollData);
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`, 
+      'Content-Type': 'application/json' 
+    });
+
+    return this.http.post(`${this.apiUrl}/createpoll`, pollData, {headers});
   }
 
   // Get existing polls

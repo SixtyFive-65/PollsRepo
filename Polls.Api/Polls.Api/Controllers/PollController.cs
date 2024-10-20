@@ -5,7 +5,7 @@ using Polls.Api.Service.Poll;
 
 namespace Polls.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class PollController : Controller
     {
         private readonly IPollService pollService;
