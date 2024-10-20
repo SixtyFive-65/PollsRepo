@@ -10,6 +10,7 @@ using Polls.Api.Service.Poll;
 using Polls.Api.Service.User;
 using Serilog;
 using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,7 +34,12 @@ builder.Services.AddCors(options =>
                           .AllowAnyHeader());
 });
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+            .AddJsonOptions(options =>
+            {
+                // Configure JSON serialization options to handle cycles
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+            });
 
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 

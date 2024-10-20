@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Polls.Api.Data;
+using Polls.Api.Data.DomainModels;
 using Polls.Api.Models.Poll;
+
 using Serilog;
 
 namespace Polls.Api.Repository.Poll
@@ -16,33 +19,68 @@ namespace Polls.Api.Repository.Poll
             this.configuration = configuration;
         }
 
-        public async Task<IEnumerable<PollModel>> GetAllPolls()
+        public async Task<IEnumerable<PollResponseModel>> GetAllPolls()
         {
             try
             {
-                var polls = await pollingDbContext.Polls.ToListAsync();
+                var polls = await pollingDbContext.Polls
+                            .Include(p => p.Questions)
+                                .ThenInclude(q => q.Options)
+                            .ToListAsync();
 
-                return new List<PollModel>();
+                return polls.Select(p => new PollResponseModel
+                {
+                    Question = p.Question,
+                    Id = p.Id,
+                    Questions = p.Questions,
+                    UserId = p.UserId
+                });
             }
             catch (Exception ex)
             {
                 Log.Error(ex.Message, ex);
 
-                return new List<PollModel>();
+                return new List<PollResponseModel>();
             }
         }
         public async Task<bool> CreatePoll(PollModel model)
         {
             try
             {
-              
+                var poll = new Polls.Api.Data.DomainModels.Poll
+                {
+                    Question = model.Question,
+                    Questions = new List<Question>
+                    {
+                        new Question
+                        {
+                            QuestionText = model.Question,
+                            Options = model.Options.Select(p => new Data.DomainModels.Option
+                            {
+                                OptionText = p.OptionText,
+
+                            }).ToList()
+                        }
+                    }
+                };
+
+                pollingDbContext.Polls.Add(poll);
+
+                var savePollResult = await pollingDbContext.SaveChangesAsync();
+
+                if (savePollResult > 0)
+                {
+                    return true;
+                }
+
             }
             catch (Exception ex)
             {
                 Log.Error(ex.Message, ex);
 
             }
-            throw new NotImplementedException();
+
+            return false;
         }
 
         public Task<bool> Vote(PollModel model)

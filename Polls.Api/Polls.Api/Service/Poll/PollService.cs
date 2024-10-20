@@ -12,7 +12,7 @@ namespace Polls.Api.Service.Poll
         }
         public async Task<bool> CreatePoll(PollModel model)
         {
-            return default;
+            return await pollRepository.CreatePoll(model);
         }
 
         public async Task<bool> Vote(PollModel model)
@@ -21,7 +21,7 @@ namespace Polls.Api.Service.Poll
         }
 
 
-        public async Task<IEnumerable<PollModel>> GetAllPolls()
+        public async Task<IEnumerable<PollResponseModel>> GetAllPolls()
         {
             return await pollRepository.GetAllPolls();
         }

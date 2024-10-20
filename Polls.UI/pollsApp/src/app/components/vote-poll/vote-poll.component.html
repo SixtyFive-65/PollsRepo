@@ -1,27 +1,25 @@
-<div class="container mt-5">
-    <h2>Vote on Polls</h2>
+<div class="container mt-5 d-flex flex-column align-items-center">
+    <h2 class="text-center">Vote on Polls</h2>
   
-    <div *ngIf="!polls.length">Loading polls...</div>
+    <div *ngIf="!polls.length" class="text-center">Loading polls...</div>
   
-    <ul *ngIf="polls.length">
+    <ul *ngIf="polls.length" class="list-group mb-4 w-100">
       <li *ngFor="let poll of polls" (click)="onPollSelect(poll)" class="list-group-item list-group-item-action">
         {{ poll.question }}
       </li>
     </ul>
   
-    <div *ngIf="selectedPoll">
+    <div *ngIf="selectedPoll" class="text-center">
       <h3 class="mt-4">Vote for: {{ selectedPoll.question }}</h3>
-      <form [formGroup]="voteForm" (ngSubmit)="onVote()">
-        <div *ngFor="let option of selectedPoll.options">
-          <div class="form-check">
-            <input
-              type="radio"
-              [value]="option.id"
-              formControlName="selectedOption"
-              class="form-check-input"
-              id="option-{{option.id}}">
-            <label class="form-check-label" [for]="'option-' + option.id">{{ option.optionText }}</label>
-          </div>
+      <form [formGroup]="voteForm" (ngSubmit)="onVote()" class="w-100">
+        <div *ngFor="let option of selectedPoll.options" class="form-check">
+          <input
+            type="radio"
+            [value]="option.id"
+            formControlName="selectedOption"
+            class="form-check-input"
+            id="option-{{option.id}}">
+          <label class="form-check-label" [for]="'option-' + option.id">{{ option.optionText }}</label>
         </div>
   
         <button type="submit" class="btn btn-primary mt-3">Submit Vote</button>

@@ -4,7 +4,7 @@ namespace Polls.Api.Repository.Poll
 {
     public interface IPollRepository
     {
-        Task<IEnumerable<PollModel>> GetAllPolls();
+        Task<IEnumerable<PollResponseModel>> GetAllPolls();
         Task<bool> CreatePoll(PollModel model);
         Task<bool> Vote(PollModel model);
     }
