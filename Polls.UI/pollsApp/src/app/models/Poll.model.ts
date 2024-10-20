@@ -5,6 +5,7 @@ export interface Poll {
 }
 
 export interface Option {
+  id: number;
   optionText: string;
 }
 

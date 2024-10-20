@@ -38,7 +38,7 @@ builder.Services.AddControllers()
             .AddJsonOptions(options =>
             {
                 // Configure JSON serialization options to handle cycles
-                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
             });
 
 var jwtSettings = builder.Configuration.GetSection("Jwt");

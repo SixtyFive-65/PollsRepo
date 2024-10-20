@@ -28,13 +28,19 @@ namespace Polls.Api.Repository.Poll
                                 .ThenInclude(q => q.Options)
                             .ToListAsync();
 
-                return polls.Select(p => new PollResponseModel
+                var pollswithquestions  = polls.Select(p => new PollResponseModel
                 {
-                    Question = p.Question,
                     Id = p.Id,
-                    Questions = p.Questions,
-                    UserId = p.UserId
+                    UserId = p.UserId,
+                    Question = p.Question,
+                    Options = p.Questions.SelectMany(o => o.Options).Select(o => new Models.Poll.Option // Mapping to the response model
+                    {
+                        Id = o.Id,
+                        OptionText = o.OptionText,
+                    }).ToList(),
                 });
+
+                return pollswithquestions.ToList();
             }
             catch (Exception ex)
             {

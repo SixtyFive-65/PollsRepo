@@ -5,15 +5,18 @@ namespace Polls.Api.Models.Poll
     public class PollModel
     {
         [Required]
-        public string Question { get; set; } // Represents the poll question
+        public string Question { get; set; } 
 
         [Required]
-        public List<Option> Options { get; set; } // Represents a list of options for the poll
+        public List<Option> Options { get; set; }
     }
 
     public class Option
     {
         [Required]
-        public string OptionText { get; set; } // Represents the text of an individual option
+        public int Id { get; set; }
+
+        [Required]
+        public string OptionText { get; set; } 
     }
 }
