@@ -6,6 +6,6 @@ namespace Polls.Api.Repository.Poll
     {
         Task<IEnumerable<PollResponseModel>> GetAllPolls();
         Task<bool> CreatePoll(PollModel model);
-        Task<bool> Vote(PollModel model);
+        Task<bool> Vote(VoteModel model);
     }
 }

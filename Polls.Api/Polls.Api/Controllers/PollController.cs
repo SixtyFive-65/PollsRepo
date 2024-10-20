@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Polls.Api.Models.Poll;
 using Polls.Api.Service.Poll;
 
@@ -37,22 +36,19 @@ namespace Polls.Api.Controllers
             }
         }
 
-
         [HttpPost("Vote")]
         public async Task<IActionResult> Vote([FromBody] VoteModel model)
         {
-            //var createPollResult = await pollService.CreatePoll(model);
+            var createPollResult = await pollService.Vote(model);
 
-            //if (createPollResult)
-            //{
-            //    return Ok(createPollResult);
-            //}
-            //else
-            //{
-            //    return BadRequest(createPollResult);
-            //}
-
-            return default;
+            if (createPollResult)
+            {
+                return Ok(createPollResult);
+            }
+            else
+            {
+                return BadRequest(createPollResult);
+            }
         }
     }
 }

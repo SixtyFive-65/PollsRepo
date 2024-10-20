@@ -12,6 +12,7 @@ namespace Polls.Api.Data
         public DbSet<Poll> Polls { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Option> Options { get; set; }
+        public DbSet<Vote> Votes { get; set; } // Add this line
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

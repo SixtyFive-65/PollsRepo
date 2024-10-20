@@ -15,9 +15,9 @@ namespace Polls.Api.Service.Poll
             return await pollRepository.CreatePoll(model);
         }
 
-        public async Task<bool> Vote(PollModel model)
+        public async Task<bool> Vote(VoteModel model)
         {
-            return default;
+            return await pollRepository.Vote(model);
         }
 
 

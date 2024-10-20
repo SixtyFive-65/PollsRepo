@@ -17,6 +17,8 @@ namespace Polls.Api.Models.Poll
         public int Id { get; set; }
 
         [Required]
-        public string OptionText { get; set; } 
+        public string OptionText { get; set; }
+
+        public int VoteCount { get; set; }
     }
 }

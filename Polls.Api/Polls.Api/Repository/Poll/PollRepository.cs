@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Polls.Api.Data;
 using Polls.Api.Data.DomainModels;
 using Polls.Api.Models.Poll;
@@ -26,9 +25,10 @@ namespace Polls.Api.Repository.Poll
                 var polls = await pollingDbContext.Polls
                             .Include(p => p.Questions)
                                 .ThenInclude(q => q.Options)
+                                .ThenInclude(q => q.Votes)
                             .ToListAsync();
 
-                var pollswithquestions  = polls.Select(p => new PollResponseModel
+                var pollswithquestions = polls.Select(p => new PollResponseModel
                 {
                     Id = p.Id,
                     UserId = p.UserId,
@@ -37,6 +37,8 @@ namespace Polls.Api.Repository.Poll
                     {
                         Id = o.Id,
                         OptionText = o.OptionText,
+                        VoteCount = o.Votes.Count()
+
                     }).ToList(),
                 });
 
@@ -74,6 +76,8 @@ namespace Polls.Api.Repository.Poll
 
                 var savePollResult = await pollingDbContext.SaveChangesAsync();
 
+                Log.Information($"Successfully added {model.Question} poll!");
+
                 if (savePollResult > 0)
                 {
                     return true;
@@ -89,9 +93,44 @@ namespace Polls.Api.Repository.Poll
             return false;
         }
 
-        public Task<bool> Vote(PollModel model)
+        public async Task<bool> Vote(VoteModel model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                bool voteResponse = false;
+
+                var option = await pollingDbContext.Options.Include(o => o.Votes)
+                                        .FirstOrDefaultAsync(o => o.Id == model.OptionId);
+
+                if (option == null)
+                {
+                    Log.Warning($"{model.OptionId} does not exist");
+
+                    return false;
+                }
+
+                var vote = new Vote
+                {
+                    OptionId = model.OptionId
+                };
+
+                pollingDbContext.Votes.Add(vote);
+
+                var voteResult = await pollingDbContext.SaveChangesAsync();
+
+                if (voteResult > 0)
+                {
+                    voteResponse = true;
+                }
+
+                return voteResponse;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, ex);
+
+                return false;
+            }
         }
     }
 }
