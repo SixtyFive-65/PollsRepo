@@ -9,15 +9,14 @@ import { HomeComponent } from './components/home/home.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { VotePollComponent } from './components/vote-poll/vote-poll.component';
 
-
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'view-polls', component: ViewPollsComponent },
+  { path: 'view-polls', component: ViewPollsComponent, canActivate: [AuthGuard]  },
   { path: 'create-poll', component: CreatePollComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'contact-us', component: ContactUsComponent },
-  { path: 'vote-poll', component: VotePollComponent },
+  { path: 'vote-poll', component: VotePollComponent, canActivate: [AuthGuard]  },
 ];
 
 @NgModule({
