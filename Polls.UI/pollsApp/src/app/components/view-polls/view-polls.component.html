@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-5 d-flex flex-column align-items-center">
   <h2 class="text-center mb-4">Polls</h2>
 
   <div *ngIf="loading" class="text-center">Loading polls...</div>
@@ -8,10 +8,10 @@
     No polls available.
   </div>
 
-  <div *ngFor="let poll of polls" class="mb-4 border p-3 rounded">
-    <h5>{{ poll.question }}</h5>
-    <ul>
-      <li *ngFor="let option of poll.options">{{ option.optionText }} - {{ option.voteCount }} votes</li>
+  <div *ngFor="let poll of polls" class="mb-4 border p-3 rounded w-75">
+    <h5 class="text-center">{{ poll.question }}</h5>
+    <ul class="list-unstyled">
+      <li *ngFor="let option of poll.options" class="text-center">{{ option.optionText }} - {{ option.voteCount }} votes</li>
     </ul>
   </div>
 </div>
